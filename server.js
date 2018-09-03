@@ -1,8 +1,12 @@
 const express = require('express');
-const path = require('path');
 const app = express();
+const path = require('path');
 const http = require('http').Server(app);
 const fs = require('fs');
+
+require('./src/app/routes/auth.js')(app, fs);
+require('./src/app/routes/register.js')(app, fs);
+//require('./src/app/routes/auth.js')(http);
 
 app.use(express.static(path.join(__dirname, 'dist/chat-system')));
 
