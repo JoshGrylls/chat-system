@@ -1,13 +1,13 @@
-<form [formGroup] = "registerForm" (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmit()">
   <div class="form-group">
 
     <label for="username"><b>New Username</b></label>
-    <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+    <input type="text" [(ngModel)]="username" name="username" class="form-control" />
 
     <label for="password"><b>New Password</b></label>
-    <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+    <input type="text" [(ngModel)]="password" name="password" class="form-control"/>
 
-    <button [disabled]="loading" class="btn btn-primary">Register</button>
-    <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
+    <button type="submit">Login</button>
+    <a [routerLink]="['/login']" class="btn btn-link">Cancle</a>
   </div>
 </form>

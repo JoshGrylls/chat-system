@@ -20,6 +20,5 @@ module.exports = function(app, fs){
         res.send({'username': uname, 'success': false});
       }
     })
-
   })
 }

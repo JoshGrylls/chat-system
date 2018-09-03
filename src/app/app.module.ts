@@ -10,6 +10,10 @@ import { LoginComponent } from './login/login.component';
 import { MenuComponent } from './menu/menu.component';
 import { AccountComponent } from './account/account.component';
 import { RegisterComponent } from './register/register.component';
+import { ChatroomComponent } from './chatroom/chatroom.component';
+import { SuperMenuComponent } from './super/super-menu/super-menu.component';
+import { GroupMenuComponent } from './group/group-menu/group-menu.component';
+import { UserMenuComponent } from './normal/user-menu/user-menu.component';
 
 
 @NgModule({
@@ -19,6 +23,10 @@ import { RegisterComponent } from './register/register.component';
     MenuComponent,
     AccountComponent,
     RegisterComponent,
+    ChatroomComponent,
+    SuperMenuComponent,
+    GroupMenuComponent,
+    UserMenuComponent,
   ],
   imports: [
     BrowserModule,

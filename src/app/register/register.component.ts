@@ -1,9 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { AuthUserService } from '../services/auth-user.service';
 
-@Component({templateUrl: 'register.component.html'})
+
+@Component({
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
+})
 
 export class RegisterComponent implements OnInit {
   constructor(
@@ -15,6 +22,6 @@ export class RegisterComponent implements OnInit {
 
 
     onSubmit() {
-
+      
     }
 }

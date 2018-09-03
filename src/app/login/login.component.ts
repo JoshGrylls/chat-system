@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { AuthUserService } from '../services/auth-user.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,8 +13,9 @@ import { AuthUserService } from '../services/auth-user.service';
 })
 
 export class LoginComponent implements OnInit {
-  username: 'SuperAdmin';
-  password: '123';
+
+  username:string = '';
+  password:string = '';
 
   constructor(private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -23,11 +25,27 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     }
 
-  onSubmit() {
-    this.authservice.login(this.username, this.password).subscribe(
+  onSubmit(event) {
+    event.preventDefault();
+    console.log(this.username);
+    if(this.username == "super" && this.password == "123") {
+      localStorage.setItem('username', this.username);
+      this.router.navigateByUrl('/account');
+    }
+    if(this.username == "group" && this.password == "123") {
+      localStorage.setItem('username', this.username);
+      this.router.navigateByUrl('/account');
+    }
+    if(this.username == "user" && this.password == "123") {
+      localStorage.setItem('username', this.username);
+      this.router.navigateByUrl('/account');
+    }
+
+    /*this.authservice.login(this.username, this.password).subscribe(
       data=>{
-        sessionStorage.setItem('currentUser', data.username);
-        this.router.navigateByUrl('/chat');  },
-        error=>{  alert('Username and password were incorrect');  }
-      )}
+        sessionStorage.setItem('username', data.username);
+        this.router.navigateByUrl('/account');  },
+        error=>{  alert('Username and password were incorrect');
+                  console.log(error); }
+      )*/}
   }
