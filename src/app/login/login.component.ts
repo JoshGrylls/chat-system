@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { AuthUserService } from '../services/auth-user.service';
+import { AppComponent } from '../app.component';
 
 
 @Component({
@@ -20,16 +21,17 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-      private authservice: AuthUserService) { }
+        private authservice: AuthUserService,
+        private roleService: AppComponent) { }
 
   ngOnInit() {
     }
 
   onSubmit(event) {
     event.preventDefault();
-    console.log(this.username);
     if(this.username == "super" && this.password == "123") {
       localStorage.setItem('username', this.username);
+      this.roleService.onLogin(this.username);
       this.router.navigateByUrl('/account');
     }
     if(this.username == "group" && this.password == "123") {

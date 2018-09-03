@@ -1,5 +1,22 @@
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 <div id="container">
-  <app-menu></app-menu>
+  <div *ngIf="default">
+    <app-menu></app-menu>
+  </div>
+
+  <div *ngIf="super">
+    <app-super-menu></app-super-menu>
+  </div>
+
+  <div *ngIf="group">
+    <app-group-menu></app-group-menu>
+  </div>
+
+  <div *ngIf="normal">
+    <app-user-menu></app-user-menu>
+  </div>
+
   <div style="width:90%;height: 100%;float:right;">
     <router-outlet></router-outlet>
   </div>

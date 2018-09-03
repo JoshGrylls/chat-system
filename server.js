@@ -6,7 +6,6 @@ const fs = require('fs');
 
 require('./src/app/routes/auth.js')(app, fs);
 require('./src/app/routes/register.js')(app, fs);
-//require('./src/app/routes/auth.js')(http);
 
 app.use(express.static(path.join(__dirname, 'dist/chat-system')));
 

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-
+  username:string = localStorage.getItem('username');
   constructor() { }
 
   ngOnInit() {
