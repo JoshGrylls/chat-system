@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {Router} from "@angular/router";
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+
+import { AuthenticationService, AlertService } from '../services';
 
 @Component({
   selector: 'app-login',
@@ -8,26 +12,45 @@ import {Router} from "@angular/router";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  username:string='';
-  password:string='';
+  loginForm: FormGroup;
+  loading = false;
+  submitted = false;
+  returnUrl: string;
 
-  constructor(private router:Router, private form:FormsModule) { }
+  constructor(private formBuilder: FormBuilder,
+        private route: ActivatedRoute,
+        private router: Router,
+        private authenticationService: AuthenticationService,
+        private alertService: AlertService) { }
+
   ngOnInit() {
-  }
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
 
-  loginUser(event) {
-    event.preventDefault();
-    if (this.username == "SuperAdmin" && this.password == "123") {
-      this.router.navigateByUrl('/account');
-      localStorage.setItem("username", this.username);
-    }
-    if (this.username == "GroupAdmin" && this.password == "123") {
-      this.router.navigateByUrl('/account');
-      localStorage.setItem("username", this.username);
-    }
-    if (this.username == "normalUser" && this.password == "123") {
-      this.router.navigateByUrl('/account');
-      localStorage.setItem("username", this.username);
-    }
-  }
+    this.authenticationService.logout();
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 }
+    get f() { return this.loginForm.controls; }
+
+    onSubmit() {
+      this.submitted = true;
+
+      if (this.loginForm.invalid) {
+        return;
+      }
+
+      this.loading = true;
+      this.authenticationService.login(this.f.username.value, this.f.password.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate([this.returnUrl]);
+        },
+        error => {
+          this.alertService.error(error);
+          this.loading = false;
+        });
+      }
+    }
