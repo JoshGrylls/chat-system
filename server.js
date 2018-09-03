@@ -7,9 +7,9 @@ const fs = require('fs');
 app.use(express.static(path.join(__dirname, 'dist/chat-system')));
 
 //catch all other routes requests and return it to the index
-/*app.get('*', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname), 'dist/chat-system/index.html')
-});*/
+});
 
 const port = process.env.PORT || 4600;
 
